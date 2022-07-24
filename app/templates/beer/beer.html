@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Beer - {{ beer.name }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row beer">
+        <div class="offset-2 col-8">
+            <h3>{{ beer.name }}</h3>
+            <hr>
+
+            <div class="d-flex flex-row justify-content-between">
+                <div>
+                    <p>country: {{ beer.country }} </p>
+                    <p>type: {{ beer.type }} </p>
+                    <p>year: {{ beer.year }} </p>
+                    <p>image: {{ beer.image }} </p>
+                    <p>brewery: {{ beer.brewery }} </p>
+                    <p>description: {{ beer.description }} </p>
+                </div>
+                <div>
+                    <img class="img-fluid" src="{{ url_for('static', filename='images/beer.jpg') }}" alt="Beer image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+{% endblock %}
+

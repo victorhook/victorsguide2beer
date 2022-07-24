@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="offset-2 col-8">
+            <h3>Senaste nytt:</h3>
+
+            <ul class="list-group">
+                {% include 'news_teaser.html' %}
+            </ul>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+{% endblock %}

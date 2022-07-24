@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{# Post specific variables, set by child post.  #}
+
+{% set this_title %}
+    {% block post_title %}
+        Title missing
+    {% endblock %}
+{% endset %}
+
+{% set this_date %}
+    {% block post_date %}
+        Date missing
+    {% endblock %}
+{% endset %}
+
+{% set this_body %}
+    {% block post_body %}
+        Body missing
+    {% endblock %}
+{% endset %}
+
+
+{# Title & CSS #}
+
+{% block title %}
+Blogg - {{ this_title }}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+
+{# Content  #}
+
+{% block content %}
+
+    <div class="row text-center">
+        <h2 class="post-title">{{ this_title }}</h2>
+        <p>{{ this_date }}</p>
+        <hr class="w-75 m-auto">
+    </div>
+
+    <article>
+        {% markdown %}
+            {{ this_body }}
+        {% endmarkdown %}
+    </article>
+{% endblock %}
+
+{% block js %}
+{% endblock %}
+

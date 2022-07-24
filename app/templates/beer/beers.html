@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Öl
+{% endblock %}
+
+{% block css %}
+    <link href="{{ url_for('static', filename='css/beer.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% macro render_beer(beer) %}
+    <div class="row mb-3">
+        <a class="offset-3 col-6 card card-clickable beer-card"
+        href="{{ url_for('get_beer', beer_name=beer.name) }}">
+            <div class="card-body d-flex justify-content-between">
+                <div class="d-flex flex-column justify-content-start">
+                    <h3 class="card-title">
+                        {{ beer.name }}
+                    </h3>
+                    <p class="card-text">
+                        {{ beer.score }}/10 beers
+                    </p>
+                    <p class="card-text">
+                        {{ beer.country }}
+                    </p>
+                    <p class="card-text">
+                        {{ beer.type }}
+                    </p>
+                </div>
+
+                <img class="img-fluid" src="{{ url_for('static', filename='images/beer.jpg') }}" alt="Beer image">
+                <!--<img class="card-image img-fluid" src="{{ url_for('static', filename='images/logo.png') }}" alt="Image"> -->
+            </div>
+        </a>
+    </div>
+{% endmacro %}
+
+{% block content %}
+
+    <div class="d-flex flex-row">
+
+        <div class="d-flex justify-content-start ms-3 flex-column">
+            <h3>Ölsorter</h3>
+
+            <hr>
+
+            {% for beer in types %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{ beer.beer_type }}"
+                           id="{{ beer.beer_type }}" onclick="filter_beer_type('{{ beer.beer_type }}', '{{ beer.active }}')"
+                           {% if beer.active %} checked {% endif %}>
+                    <label class="form-check-label" for="{{ beer.beer_type }}1">
+                        {{ beer.beer_type }}
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="container-fluid">
+
+            <!-- Top three beers -->
+            {% if top_three_beers %}
+                <div class="row text-center">
+                    <h3>Hetaste 3 öl just nu!</h3>
+                </div>
+                <div class="mb-5">
+                    {% for beer in top_three_beers %}
+                        {{ render_beer(beer) }}
+                    {% endfor %}
+                </div>
+                <div class="row text-center mb-3">
+                    <h3>All öl</h3>
+                </div>
+            {% endif %}
+            <!----------------------->
+
+            {% for beer in beers %}
+                {{ render_beer(beer) }}
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    const BEER_URL = "{{ url_for('get_beers') }}";
+
+    function filter_beer_type(beer_type, is_checked) {
+        let endpoint = BEER_URL;
+
+        // If we've already checked and press the button again, we remove
+        // the filter.
+        if (is_checked.toLowerCase() == 'false') {
+            endpoint += `?beer_type=${beer_type}`;
+        }
+        location.href = endpoint;
+    }
+
+</script>
+
+{% endblock %}
+

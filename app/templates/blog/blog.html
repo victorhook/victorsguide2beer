@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Blogg
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+
+    {% for post in posts %}
+        <div class="row mb-3">
+            <a class="offset-2 col-8 card card-clickable" href="{{ url_for('get_post', post=post.path) }}">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        {{ post.title }}
+                    </h3>
+                    <p class="card-date">
+                        {{ post.date }}
+                    </p>
+                    <p class="card-text">
+                        {{ post.excerpt }}
+                    </p>
+                    <!--<img class="card-image img-fluid" src="{{ url_for('static', filename='images/logo.png') }}" alt="Image"> -->
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
+{% block js %}
+{% endblock %}
+

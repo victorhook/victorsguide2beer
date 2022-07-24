@@ -1,0 +1,40 @@
+:root {
+    --bg-primary: #fad14b;
+    --bg-primary2: #ffe5ad;
+    --bg-primary3: #fcf2dc;
+    --fg-primary: #2460e2;
+}
+
+/* --- Colors --- */
+.color-primary-bg {
+    background-color: var(--bg-primary);
+}
+
+.color-primary-fg {
+    color: #729DFC !important;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* --- Bootstrap --- */
+.nav-link {
+    color: var(--fg-primary);
+}
+
+.card {
+    background-color: rebeccapurple;
+}
+
+.card-clickable {
+    text-decoration: none;
+    background-color: var(--bg-primary2);
+    color: var(--fg-primary);
+    transition: 0.3s ease-in-out all;
+}
+
+.card-clickable:hover {
+    background-color: var(--bg-primary3);
+    color: var(--fg-primary);
+}
