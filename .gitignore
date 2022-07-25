@@ -1,4 +1,0 @@
-*.pyc
-env/
-app/db.json
-.vscode/
