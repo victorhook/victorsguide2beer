@@ -1,23 +1,86 @@
 {% extends 'base.html' %}
 
 {% block css %}
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
 {% endblock %}
 
+<!-- Macros -->
+{% macro render_beer(event) %}
+
+{% set beer = event.event %}
+
+<div class="news-beer">
+    <h3>{{ beer.name }}</h3>
+    <div class="news-body d-flex justify-content-between">
+        <div class="d-flex flex-column justify-content-between">
+            <div>
+                <p class="m-0">{{ beer.country }}</p>
+                <p class="m-0">{{ beer.type }}</p>
+                <p class="m-0">{{ beer.score }} / 10 öl</p>
+            </div>
+            <p class="m-0 fw-light">{{ event.added_date }}</p>
+        </div>
+        <div>
+            <img class="img-fluid" src="{{ url_for('static', filename='images/beer.jpg') }}">
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro render_post(event) %}
+{% set post = event.event %}
+
+<div class="news-post">
+    <h3>{{ post.title }}</h3>
+    <div class="news-body d-flex justify-content-between">
+        <div class="d-flex justify-content-between flex-column me-2">
+            <div>
+                <p class="m-0 text-wrap">{{ post.excerpt }}</p>
+            </div>
+                <p class="m-0 fw-light">{{ event.added_date }}</p>
+        </div>
+        <div>
+            <img class="img-fluid" src="{{ url_for('static', filename='images/logo.png') }}">
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro render_event(event) %}
+    <div class="news-card m-3 p-3 text-start">
+        {% if event.event.__class__.__name__ == 'Beer' %}
+            {{ render_beer(event) }}
+        {% elif event.event.__class__.__name__ == 'BlogPost' %}
+            {{ render_post(event) }}
+        {% endif %}
+
+        <hr class="mt-2 mb-2">
+    </div>
+{% endmacro %}
+<!------>
+
+
+<!-- Content -->
 {% block content %}
 
-    <div class="row">
+<div class="d-flex flex-row justify-content-between mt-5">
 
-        <div class="offset-2 col-8">
-            <h3>Senaste nytt:</h3>
+    <div class="text-center ms-5">
+        <h3>Senaste nytt:</h3>
 
-            <ul class="list-group">
-                {% include 'news_teaser.html' %}
-            </ul>
-
+        <div class="d-flex flex-column justify-content-start">
+            {% for event in new_events  %}
+                <!--<p>Lade till:</p> -->
+                {{ render_event(event) }}
+            {% endfor %}
         </div>
-
     </div>
 
+    <div class="me-0">
+        <img class="img-fluid" src="{{ url_for('static', filename='images/wine.jpg') }}">
+    </div>
+
+</div>
 
 {% endblock %}
 

@@ -23,10 +23,10 @@
 </head>
 <body class="color-primary-bg">
 
-    <nav class="navbar navbar-expand-sm color-primary-fg">
+    <nav class="navbar navbar-expand-sm color-primary-fg pt-3 pb-3 pe-5 ps-5">
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="{{ url_for('get_index') }}">hookbeer</a>
+            <a class="navbar-brand" href="{{ url_for('get_index') }}">victorsguide2beer</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -34,15 +34,15 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                    <li class="fs-4 nav-item ps-5">
                         <a class="nav-link {% if request.endpoint == 'get_blog' %}active{% endif %}"
                           href="{{ url_for('get_blog') }}">Blogg</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="fs-4 nav-item ps-5">
                         <a class="nav-link {% if request.endpoint == 'get_brewing' %}active{% endif %}"
                          href="{{ url_for('get_brewing') }}">Bryggning</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="fs-4 nav-item ps-5">
                         <a class="nav-link {% if request.endpoint == 'get_beers' %}active{% endif %}"
                          href="{{ url_for('get_beers') }}">Ölsorter</a>
                     </li>

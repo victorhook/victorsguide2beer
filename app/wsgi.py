@@ -9,4 +9,4 @@ sys.path.append(str(BASE_PATH))
 sys.path.append(str(BASE_PATH.parent))
 
 # We just import the application, do not run it, if using apache!
-from app.main import app as application
+from app import app as application

@@ -29,7 +29,7 @@ class Database:
     @classmethod
     def _load(cls) -> dict:
         try:
-            with open(DATABASE_PATH) as f:
+            with open(DATABASE_PATH, encoding='utf-8') as f:
                 return json.load(f)
         except FileNotFoundError:
             print(f'Failed to find database at {DATABASE_PATH}'
@@ -42,5 +42,5 @@ class Database:
 
     @classmethod
     def _save(cls, data: dict) -> None:
-        with open(DATABASE_PATH, 'w') as f:
+        with open(DATABASE_PATH, 'w', encoding='utf-8') as f:
             return json.dump(data, f, indent=4)

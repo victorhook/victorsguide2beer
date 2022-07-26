@@ -18,6 +18,9 @@ body {
     overflow-x: hidden;
 }
 
+/* --- Navbar --- */
+
+
 /* --- Bootstrap --- */
 .nav-link {
     color: var(--fg-primary);

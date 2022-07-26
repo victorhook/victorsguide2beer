@@ -1,4 +1,4 @@
-APP = app/main
+APP = app/app
 PORT = 8080
 REMOTE = 142.93.164.184
 REMOTE_USER = git

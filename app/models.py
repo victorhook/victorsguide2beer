@@ -1,3 +1,4 @@
+from typing import Union
 from dataclasses import dataclass
 
 
@@ -15,7 +16,15 @@ class Beer:
     country: str
     type: str
     score: int
+    added_date: str
     year: str = ''
     image: str = None
     brewery: str = ''
     description: str = ''
+
+
+
+@dataclass
+class Event:
+    added_date: str
+    event: Union[Beer, BlogPost]
