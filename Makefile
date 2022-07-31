@@ -12,7 +12,7 @@ run:
 deploy:
 #git commit
 	@echo "SSH:ing to remote..."
-	ssh ${REMOTE_USER}@${REMOTE} "cd ${PROJECT_DIR} && git fetch && git reset --hard origin/master"
+	ssh ${REMOTE_USER}@${REMOTE} "cd ${PROJECT_DIR} && git fetch && git reset --hard origin/master && sudo systemtl restart apache2"
 
 
 # Install

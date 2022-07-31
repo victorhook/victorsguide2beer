@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+
 :root {
     --bg-primary: #fad14b;
     --bg-primary2: #ffe5ad;
@@ -16,6 +18,22 @@
 
 body {
     overflow-x: hidden;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.5em;
+    color: #01b19c;
+}
+
+
+.text-normal {
+    color: #01a592 !important;
+}
+
+.text-light {
+    color: #00C4EB !important;
+}
+
+.text-lighter {
+    color: #00C4EB !important;
 }
 
 /* --- Navbar --- */
@@ -23,7 +41,8 @@ body {
 
 /* --- Bootstrap --- */
 .nav-link {
-    color: var(--fg-primary);
+    /*color: var(--fg-primary); */
+    color: #296d65;
 }
 
 .card {
@@ -32,12 +51,10 @@ body {
 
 .card-clickable {
     text-decoration: none;
-    background-color: var(--bg-primary2);
-    color: var(--fg-primary);
+    background-color: #f7cc3f;
     transition: 0.3s ease-in-out all;
 }
 
 .card-clickable:hover {
     background-color: var(--bg-primary3);
-    color: var(--fg-primary);
 }

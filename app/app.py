@@ -3,8 +3,11 @@ from dataclasses import dataclass
 import os
 from pathlib import Path
 from typing import List
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
+from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import generate_password_hash, check_password_hash
 from jinja_markdown import MarkdownExtension
+from datetime import datetime
 
 from database import Database as db
 import models
@@ -13,10 +16,21 @@ import utils
 
 app = Flask(__name__)
 app.jinja_env.add_extension(MarkdownExtension)
+auth = HTTPBasicAuth()
 
+users = {
+    "john": generate_password_hash("hello"),
+    "susan": generate_password_hash("bye")
+}
 
 BASE_PATH = Path(__file__).absolute().parent
 POST_PATHS = BASE_PATH.joinpath('templates', 'posts')
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users and \
+            check_password_hash(users.get(username), password):
+        return username
 
 
 @app.route('/')
@@ -106,6 +120,33 @@ class BeerView:
         return render_template(
             'beer/beer.html',
             beer=beer,
+        )
+
+
+class Admin:
+
+    @app.route('/add_beer')
+    @auth.login_required
+    def add_beer() -> None:
+        return render_template(
+            'admin/admin.html'
+        )
+
+    @app.route('/add_new_beer', methods=['POST'])
+    @auth.login_required
+    def add_new_beer() -> None:
+        added_date = datetime.now().strftime('%Y-%m-%d')
+        new_beer = models.Beer(**request.form, added_date=added_date)
+        print(new_beer)
+        print(request.files)
+        
+        image = request.files['image']
+        base = BASE_PATH.joinpath('static', 'beers')
+        abspath = str(base.joinpath(image.filename))
+        image.save(abspath)
+        
+        return render_template(
+            'admin/admin.html'
         )
 
 

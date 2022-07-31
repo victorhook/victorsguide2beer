@@ -5,22 +5,23 @@ Blogg
 {% endblock %}
 
 {% block css %}
+    <link href="{{ url_for('static', filename='css/blog.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 
     {% for post in posts %}
         <div class="row mb-3">
-            <a class="offset-xl-4 col-xl-5 offset-lg-3 col-lg-6 offset-2 col-8 card card-clickable" href="{{ url_for('get_post', post=post.path) }}">
+            <a class="blog-card offset-xl-4 col-xl-5 offset-lg-3 col-lg-6 offset-2 col-8 card card-clickable" href="{{ url_for('get_post', post=post.path) }}">
                 <div class="card-body">
-                    <h3 class="card-title">
+                    <h2 class="card-title text-normal">
                         {{ post.title }}
-                    </h3>
-                    <p class="card-date">
-                        {{ post.date }}
-                    </p>
-                    <p class="card-text">
+                    </h2>
+                    <p class="card-text text-light">
                         {{ post.excerpt }}
+                    </p>
+                    <p class="card-date text-lighter">
+                        {{ post.date }}
                     </p>
                     <!--<img class="card-image img-fluid" src="{{ url_for('static', filename='images/logo.png') }}" alt="Image"> -->
                 </div>

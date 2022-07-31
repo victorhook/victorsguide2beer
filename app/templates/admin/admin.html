@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <link href="{{ url_for('static', filename='css/admin.css') }}" rel="stylesheet">
+{% endblock %}
+
+<!-- Macros -->
+{% macro render_beer(event) %}
+
+{% set beer = event.event %}
+
+<div class="news-beer">
+    <h3>{{ beer.name }}</h3>
+    <div class="news-body d-flex justify-content-between">
+        <div class="d-flex flex-column justify-content-between">
+            <div>
+                <p class="m-0">{{ beer.country }}</p>
+                <p class="m-0">{{ beer.type }}</p>
+                <p class="m-0">{{ beer.score }} / 10 öl</p>
+            </div>
+            <p class="m-0 fw-light">{{ event.added_date }}</p>
+        </div>
+        <div>
+            <img class="img-fluid" src="{{ url_for('static', filename='images/beer.jpg') }}">
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro render_param(name, type='string', required=False) %}
+<div class="mb-3">
+    <label for="{{ name }}" class="form-label">
+        {{ name | capitalize }}
+        {% if required %}
+            <span class="ps-3">(krävs)</span>
+        {% endif %}
+    </label>
+    {% if type == 'string' %}
+        <input type="text" class="form-control" name="{{ name }}" id="{{ name }}" {% if required %} required {% endif %}>
+    {% elif type == 'int' %}
+        <input type="number" class="form-control" name="{{ name }}" id="{{ name }}" {% if required %} required {% endif %}>
+    {% elif type == 'image' %}
+        <input type="file" class="form-control" name="{{ name }}" id="{{ name }}" {% if required %} required {% endif %}>
+    {% endif %}
+</div>
+{% endmacro %}
+
+<!------>
+
+
+<!-- Content -->
+{% block content %}
+
+<div class="row text-center mt-3">
+    <h1>ADMIN</h1>
+    <hr class="ms-5 me-5">
+</div>
+
+    <form method="POST" action="{{ url_for('add_new_beer') }}" class="w-50 m-auto" enctype="multipart/form-data">
+        {{ render_param('name', required=False) }}
+        {{ render_param('country', required=False) }}
+        {{ render_param('type', required=False) }}
+        {{ render_param('score', required=False) }}
+        {{ render_param('image', type='image') }}
+        {{ render_param('year', type='int') }}
+        {{ render_param('brewery') }}
+        {{ render_param('description') }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        const home = `${location.origin}/`
+        logout();
+        function logout() {
+            let k = `log:out@${home}`
+            console.log(k);
+            //window.location = k;
+        }
+    </script>
+{% endblock %}
