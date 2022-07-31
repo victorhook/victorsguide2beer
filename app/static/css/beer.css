@@ -1,3 +1,29 @@
+.beer-card {
+    display: inline-block;
+    width: 300px;
+    height: 250px;
+    position: relative;
+}
+
 .beer-card img {
-    max-width: 200px;
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    width: 120px;
+}
+
+.beer-side-panel {
+    border-right: 1px solid rgb(151, 151, 151);
+}
+
+@media screen and (max-width: 1300px) {
+    .beer-card {
+        width: 250px;
+    }
+}
+
+  @media screen and (max-width: 600px) {
+    .beer-card {
+        width: 300px;
+    }
 }

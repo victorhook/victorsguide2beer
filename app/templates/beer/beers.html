@@ -37,9 +37,9 @@
 
 {% block content %}
 
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-xl-row flex-column">
 
-        <div class="d-flex justify-content-start ms-3 flex-column">
+        <div class="beer-side-panel d-flex justify-content-start ps-5 pe-5 mt-3 flex-column">
             <h3>Ölsorter</h3>
 
             <hr>
@@ -56,14 +56,14 @@
             {% endfor %}
         </div>
 
-        <div class="container-fluid">
+        <div class="container-fluid mt-3 ps-5 pe-5">
 
             <!-- Top three beers -->
             {% if top_three_beers %}
-                <div class="row text-center">
+                <div class="row text-center mt-0 pt-0 mb-3">
                     <h3>Hetaste 3 öl just nu!</h3>
                 </div>
-                <div class="d-flex mb-5 justify-content-center">
+                <div class="d-flex flex-wrap  mb-5 justify-content-center">
                     {% for beer in top_three_beers %}
                         {{ render_beer(beer) }}
                     {% endfor %}
@@ -74,7 +74,7 @@
             {% endif %}
             <!----------------------->
 
-            <div class="d-flex flex-wrap">
+            <div class="d-flex flex-wrap mt-0 pt-0 justify-content-center">
                 {% for beer in beers %}
                     {{ render_beer(beer) }}
                 {% endfor %}

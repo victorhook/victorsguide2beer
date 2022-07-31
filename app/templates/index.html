@@ -65,19 +65,23 @@
 
 <div class="d-flex flex-row justify-content-between mt-5">
 
-    <div class="text-center ms-5">
-        <h3>Senaste nytt:</h3>
+    <div class="row">
 
-        <div class="d-flex flex-column justify-content-start">
-            {% for event in new_events  %}
-                <!--<p>Lade till:</p> -->
-                {{ render_event(event) }}
-            {% endfor %}
+        <div class="text-center offset-xl-1 col-xl-3 offset-2 col-8">
+            <h3>Senaste nytt:</h3>
+
+            <div class="d-flex flex-column justify-content-start">
+                {% for event in new_events  %}
+                    <!--<p>Lade till:</p> -->
+                    {{ render_event(event) }}
+                {% endfor %}
+            </div>
         </div>
-    </div>
 
-    <div class="me-0">
-        <img class="img-fluid" src="{{ url_for('static', filename='images/wine.jpg') }}">
+        <div class="offset-xl-1 col-xl-7 offset-2 col-8">
+            <img id="front-image" class="img-fluid" src="{{ url_for('static', filename='images/wine.jpg') }}">
+        </div>
+
     </div>
 
 </div>

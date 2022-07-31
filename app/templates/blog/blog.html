@@ -11,7 +11,7 @@ Blogg
 
     {% for post in posts %}
         <div class="row mb-3">
-            <a class="offset-2 col-8 card card-clickable" href="{{ url_for('get_post', post=post.path) }}">
+            <a class="offset-xl-4 col-xl-5 offset-lg-3 col-lg-6 offset-2 col-8 card card-clickable" href="{{ url_for('get_post', post=post.path) }}">
                 <div class="card-body">
                     <h3 class="card-title">
                         {{ post.title }}
