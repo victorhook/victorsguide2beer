@@ -1,11 +1,15 @@
 .news-card {
-    background-color: #ffe281;
+    text-decoration: none;
+    transition: 0.3s ease-in-out all;
+    background-color: #f7ca37;
+    box-shadow: 0 10px 10px #cfa310;
 }
 
-.news-card p {
-    color: rgb(34, 34, 34);
+.news-card:hover {
+    color: var(--fg-primary-shade);
+    transform: scale(1.03);
+    background-color: #f8ce44;
 }
-
 .news-body img {
     max-height: 100px;
 }

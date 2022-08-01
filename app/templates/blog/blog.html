@@ -5,29 +5,35 @@ Blogg
 {% endblock %}
 
 {% block css %}
-    <link href="{{ url_for('static', filename='css/blog.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
 {% endblock %}
+
 
 {% block content %}
 
-    {% for post in posts %}
-        <div class="row mb-3">
-            <a class="blog-card offset-xl-4 col-xl-5 offset-lg-3 col-lg-6 offset-2 col-8 card card-clickable" href="{{ url_for('get_post', post=post.path) }}">
-                <div class="card-body">
-                    <h2 class="card-title text-normal">
-                        {{ post.title }}
-                    </h2>
-                    <p class="card-text text-light">
-                        {{ post.excerpt }}
-                    </p>
-                    <p class="card-date text-lighter">
-                        {{ post.date }}
-                    </p>
-                    <!--<img class="card-image img-fluid" src="{{ url_for('static', filename='images/logo.png') }}" alt="Image"> -->
+{% for post in posts %}
+    <div class="row">
+
+        <a class="news-card offset-1 col-10 offset-lg-3 col-lg-6 offset-xl-4 col-xl-5 mt-3 mb-3 p-3 font-text fg-primary" href="{{ url_for('get_post', post=post.path) }}">
+
+            <h3 class="fs-2 fw-bold">{{ post.title }}</h3>
+            <div class="news-body d-flex justify-content-between">
+                <div class="d-flex flex-column justify-content-between">
+                    <div>
+                        <p class="fs-5 m-0">{{ post.excerpt }}</p>
+                        <p class="fs-5 m-0">{{ post.date }}</p>
+                    </div>
                 </div>
-            </a>
-        </div>
-    {% endfor %}
+                <div>
+                    <img class="img-fluid" src="{{ url_for('static', filename='images/beer.jpg') }}">
+                </div>
+            </div>
+                <!--<img class="card-image img-fluid" src="{{ url_for('static', filename='images/logo.png') }}" alt="Image"> -->
+        </a>
+
+    </div>
+{% endfor %}
+
 
 {% endblock %}
 

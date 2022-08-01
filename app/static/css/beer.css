@@ -1,8 +1,18 @@
 .beer-card {
     display: inline-block;
     width: 300px;
-    height: 250px;
+    height: 300px;
     position: relative;
+    background-color: #f3c632;
+    text-decoration: none;
+    color: var(--fg-primary);
+    transition: 0.3s ease-in-out all;
+}
+
+.beer-card:hover {
+    background-color: var(--bg-primary2);
+    color: var(--fg-primary-shade);
+    transform: scale(1.05);
 }
 
 .beer-card img {
@@ -13,7 +23,7 @@
 }
 
 .beer-side-panel {
-    border-right: 1px solid rgb(151, 151, 151);
+    border-right: 1px solid rgb(226, 161, 21);
 }
 
 @media screen and (max-width: 1300px) {

@@ -10,15 +10,15 @@
 {% set beer = event.event %}
 
 <div class="news-beer">
-    <h3>{{ beer.name }}</h3>
+    <h3 class="fs-2 fw-bold">{{ beer.name }}</h3>
     <div class="news-body d-flex justify-content-between">
         <div class="d-flex flex-column justify-content-between">
             <div>
-                <p class="m-0">{{ beer.country }}</p>
-                <p class="m-0">{{ beer.type }}</p>
-                <p class="m-0">{{ beer.score }} / 10 öl</p>
+                <p class="fs-5 m-0">{{ beer.country }}</p>
+                <p class="fs-5 m-0">{{ beer.type }}</p>
+                <p class="fs-5 m-0">{{ beer.score }} / 10 öl</p>
             </div>
-            <p class="m-0 fw-light">{{ event.added_date }}</p>
+            <p class="m-0 fs-6 fw-light">{{ event.added_date }}</p>
         </div>
         <div>
             <img class="img-fluid" src="{{ url_for('static', filename='images/beer.jpg') }}">
@@ -31,13 +31,13 @@
 {% set post = event.event %}
 
 <div class="news-post">
-    <h3>{{ post.title }}</h3>
+    <h3 class="fs-2 fw-bold">{{ post.title }}</h3>
     <div class="news-body d-flex justify-content-between">
         <div class="d-flex justify-content-between flex-column me-2">
             <div>
-                <p class="m-0 text-wrap">{{ post.excerpt }}</p>
+                <p class="m-0 fs-5 text-wrap">{{ post.excerpt }}</p>
             </div>
-                <p class="m-0 fw-light">{{ event.added_date }}</p>
+                <p class="m-0 fs-6 fw-light">{{ event.added_date }}</p>
         </div>
         <div>
             <img class="img-fluid" src="{{ url_for('static', filename='images/logo.png') }}">
@@ -47,7 +47,7 @@
 {% endmacro %}
 
 {% macro render_event(event) %}
-    <div class="news-card m-3 p-3 text-start">
+    <a class="news-card fg-primary font-text m-3 p-3 text-start" href="#">
         {% if event.event.__class__.__name__ == 'Beer' %}
             {{ render_beer(event) }}
         {% elif event.event.__class__.__name__ == 'BlogPost' %}
@@ -55,7 +55,7 @@
         {% endif %}
 
         <hr class="mt-2 mb-2">
-    </div>
+    </a>
 {% endmacro %}
 <!------>
 
@@ -68,7 +68,7 @@
     <div class="row">
 
         <div class="text-center offset-xl-1 col-xl-3 offset-2 col-8">
-            <h3>Senaste nytt:</h3>
+            <h2 class="fg-primary">Senaste nytt:</h2>
 
             <div class="d-flex flex-column justify-content-start">
                 {% for event in new_events  %}
@@ -78,7 +78,7 @@
             </div>
         </div>
 
-        <div class="offset-xl-1 col-xl-7 offset-2 col-8">
+        <div class="offset-xl-1 col-xl-7 offset-2 col-8 mt-5">
             <img id="front-image" class="img-fluid" src="{{ url_for('static', filename='images/wine.jpg') }}">
         </div>
 

@@ -35,17 +35,20 @@ Blogg - {{ this_title }}
 
 {% block content %}
 
-    <div class="row text-center">
+    <div class="row text-center font-text fg-primary">
         <h2 class="post-title">{{ this_title }}</h2>
-        <p>{{ this_date }}</p>
-        <hr class="w-75 m-auto">
+        <p class="fs-5 fw-lighter">{{ this_date }}</p>
+        <hr class="w-75 m-auto mb-5">
     </div>
 
-    <article>
-        {% markdown %}
-            {{ this_body }}
-        {% endmarkdown %}
-    </article>
+    <div class="row">
+        <article class="font-text fg-primary offset-0 col-12 ps-4 pe-4 offset-md-2 col-md-8 offset-xl-3 col-xl-6">
+            {% markdown %}
+                {{ this_body }}
+            {% endmarkdown %}
+        </article>
+    </div>
+
 {% endblock %}
 
 {% block js %}
