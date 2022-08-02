@@ -27,7 +27,7 @@
 </div>
 {% endmacro %}
 
-{% macro render_param(name, type='string', required=False) %}
+{% macro render_param(name, form_name, type='string', required=False) %}
 <div class="mb-3">
     <label for="{{ name }}" class="form-label">
         {{ name | capitalize }}
@@ -35,13 +35,22 @@
             <span class="ps-3">(krävs)</span>
         {% endif %}
     </label>
-    {% if type == 'string' %}
-        <input type="text" class="form-control" name="{{ name }}" id="{{ name }}" {% if required %} required {% endif %}>
-    {% elif type == 'int' %}
-        <input type="number" class="form-control" name="{{ name }}" id="{{ name }}" {% if required %} required {% endif %}>
-    {% elif type == 'image' %}
-        <input type="file" class="form-control" name="{{ name }}" id="{{ name }}" {% if required %} required {% endif %}>
-    {% endif %}
+
+    <input
+        {% if type == 'string' %}
+            type="text"
+        {% elif type == 'int' %}
+            type="number"  step="0.1"
+        {% elif type == 'image' %}
+            type="file"
+        {% endif %}
+
+        class="form-control"
+        name="{{ form_name }}"
+        id="{{ name }}"
+        {% if required %} required {% endif %}
+        >
+
 </div>
 {% endmacro %}
 
@@ -57,15 +66,19 @@
 </div>
 
     <form method="POST" action="{{ url_for('add_new_beer') }}" class="w-50 m-auto" enctype="multipart/form-data">
-        {{ render_param('name', required=True) }}
-        {{ render_param('country', required=True) }}
-        {{ render_param('type', required=True) }}
-        {{ render_param('score', required=True) }}
-        {{ render_param('image', type='image') }}
-        {{ render_param('year', type='int') }}
-        {{ render_param('brewery') }}
-        {{ render_param('description') }}
-        <button type="submit" class="btn btn-primary">Submit</button>
+        {{ render_param('Namn', 'name', required=True) }}
+        {{ render_param('Land', 'country', required=True) }}
+        {{ render_param('Typ', 'type', required=True) }}
+        {{ render_param('Poäng', 'score', required=True) }}
+        {{ render_param('Bild', 'image', type='image', required=True) }}
+        {{ render_param('År', 'year', type='int') }}
+        {{ render_param('Bryggeri', 'brewery') }}
+        {{ render_param('Beskrivning', 'description') }}
+
+        <div class="text-center m-5">
+            <button type="submit" class="btn btn-primary">Spara</button>
+        </div>
+
     </form>
 
 

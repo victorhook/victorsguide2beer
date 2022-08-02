@@ -136,7 +136,7 @@ class Admin:
     def add_new_beer() -> None:
         added_date = datetime.now().strftime('%Y-%m-%d')
         new_beer = models.Beer(**request.form, added_date=added_date)
-        new_beer.score = int(new_beer.score)
+        new_beer.score = float(new_beer.score)
         print(new_beer)
         print(request.files)
 
