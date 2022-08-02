@@ -34,7 +34,13 @@
         </div>
 
 
-    <img class="img-fluid rounded-2" src="{{ url_for('static', filename='images/beer.jpg') }}" alt="Beer image">
+    <img class="img-fluid rounded-2" 
+        {% if beer.image %}
+            src="{{ beer.image }}" 
+        {% else %}
+            src="{{ url_for('static', filename='images/beer.jpg') }}" 
+        {% endif %}
+        alt="Beer image">
     <!--<img class="card-image img-fluid" src="{{ url_for('static', filename='images/logo.png') }}" alt="Image"> -->
 </a>
 {% endmacro %}

@@ -86,7 +86,6 @@ class BeerView:
         beers = db.get_beers()
         types = set(BeerView.BeerType(beer.type, False) for beer in beers)
 
-
         # Filter by beer type
         if beer_type is not None:
             beers = list(filter(lambda beer: beer.type == beer_type, beers))
@@ -137,14 +136,26 @@ class Admin:
     def add_new_beer() -> None:
         added_date = datetime.now().strftime('%Y-%m-%d')
         new_beer = models.Beer(**request.form, added_date=added_date)
+        new_beer.score = int(new_beer.score)
         print(new_beer)
         print(request.files)
-        
+
         image = request.files['image']
-        base = BASE_PATH.joinpath('static', 'beers')
-        abspath = str(base.joinpath(image.filename))
+
+        BEER_RELPATH = Path('static/beers')
+        relpath = BEER_RELPATH.joinpath(image.filename)
+
+        # Save to absolute path
+        abspath = str(BASE_PATH.joinpath(relpath))
         image.save(abspath)
-        
+        new_beer.image = str(relpath)
+        if not new_beer.image.startswith('/'):
+            new_beer.image = '/' + new_beer.image
+
+        beers = db.get_beers()
+        beers.append(new_beer)
+        db.save_beers(beers)
+
         return render_template(
             'admin/admin.html'
         )

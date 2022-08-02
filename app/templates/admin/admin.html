@@ -57,10 +57,10 @@
 </div>
 
     <form method="POST" action="{{ url_for('add_new_beer') }}" class="w-50 m-auto" enctype="multipart/form-data">
-        {{ render_param('name', required=False) }}
-        {{ render_param('country', required=False) }}
-        {{ render_param('type', required=False) }}
-        {{ render_param('score', required=False) }}
+        {{ render_param('name', required=True) }}
+        {{ render_param('country', required=True) }}
+        {{ render_param('type', required=True) }}
+        {{ render_param('score', required=True) }}
         {{ render_param('image', type='image') }}
         {{ render_param('year', type='int') }}
         {{ render_param('brewery') }}
