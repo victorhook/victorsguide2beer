@@ -3,15 +3,18 @@
     width: 300px;
     height: 300px;
     position: relative;
-    background-color: #f3c632;
+    /*background-color: #f3c632;*/
+    background-color: #1ab99c;
+    box-shadow: 0 10px 10px #cfa310;
+    color: var(--fg-primary-dark);
     text-decoration: none;
-    color: var(--fg-primary);
+    border: 2px solid transparent;
     transition: 0.3s ease-in-out all;
 }
 
 .beer-card:hover {
-    background-color: var(--bg-primary2);
-    color: var(--fg-primary-shade);
+    border: 2px solid  #22201f;
+    color: var(--fg-primary-dark);
     transform: scale(1.05);
 }
 
@@ -24,6 +27,14 @@
 
 .beer-side-panel {
     border-right: 1px solid rgb(226, 161, 21);
+}
+
+/* Single beer */
+.beer-body {
+}
+
+.beer-image {
+    max-height: 300px;
 }
 
 @media screen and (max-width: 1300px) {

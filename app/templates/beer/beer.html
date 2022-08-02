@@ -1,31 +1,46 @@
 {% extends 'base.html' %}
 
+{% block css %}
+    <link href="{{ url_for('static', filename='css/beer.css') }}" rel="stylesheet">
+{% endblock %}
+
+
 {% block title %}
 Beer - {{ beer.name }}
 {% endblock %}
 
 {% block content %}
 
-    <div class="row beer">
-        <div class="offset-2 col-8">
-            <h3>{{ beer.name }}</h3>
-            <hr>
+<div class="row beer font-text fg-primary mt-5">
+    <div class="offset-3 col-6">
+        <h1 class="fs-1 fw-bold">{{ beer.name }}</h1>
+        <hr>
 
-            <div class="d-flex flex-row justify-content-between">
-                <div>
-                    <p>country: {{ beer.country }} </p>
-                    <p>type: {{ beer.type }} </p>
-                    <p>year: {{ beer.year }} </p>
-                    <p>image: {{ beer.image }} </p>
-                    <p>brewery: {{ beer.brewery }} </p>
-                    <p>description: {{ beer.description }} </p>
+        <div class="d-flex beer-body flex-column justify-content-start">
+
+            <div class="beer-info mt-3 mb-5 d-flex flew-row justify-content-between">
+
+                <div class="d-flex flex-column">
+                    <p class="fs-3 fw-light">Land: <span class="ms-2 fs-3 fw-normal">{{ beer.country }}</span> </p>
+                    <p class="fs-3 fw-light">Sort: <span class="ms-2 fs-3 fw-normal">{{ beer.type }}</span> </p>
+                    <p class="fs-3 fw-light">År: <span class="ms-2 fs-3 fw-normal">{{ beer.year }}</span> </p>
+                    <p class="fs-3 fw-light">Bryggeri: <span class="ms-2 fs-3 fw-normal">{{ beer.brewery }}</span> </p>
+                    <p class="fs-3 fw-light">Poäng: <span class="ms-2 fs-3 fw-normal">{{ beer.score }}</span> / 10 </p>
                 </div>
-                <div>
-                    <img class="img-fluid" src="{{ url_for('static', filename='images/beer.jpg') }}" alt="Beer image">
-                </div>
+
+                <img class="beer-image rounded-1" src="{{ url_for('static', filename='images/beer.jpg') }}" alt="Beer image">
+
             </div>
+
+            <div class="">
+                <p class="fs-3 fw-light">{{ beer.description }}</p>
+            </div>
+
         </div>
+
+
     </div>
+</div>
 
 {% endblock %}
 

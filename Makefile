@@ -12,9 +12,9 @@ run:
 deploy:
 #git commit
 	@echo "SSH:ing to remote..."
-	ssh ${REMOTE_USER}@${REMOTE} "cd ${PROJECT_DIR} && git fetch && git reset --hard origin/master && sudo systemtl restart apache2"
+	ssh ${REMOTE_USER}@${REMOTE} "cd ${PROJECT_DIR} && git fetch && git reset --hard origin/master && sudo -S systemctl restart apache2"
 
 
 # Install
-# pip install flask jinja-markdown
+# pip install flask jinja-markdown pip install Flask-HTTPAuth
 

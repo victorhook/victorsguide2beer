@@ -10,8 +10,10 @@
     --bg-primary: #fad14b;
     --bg-primary2: #ffe5ad;
     --bg-primary3: #fcf2dc;
-    --fg-primary: #296d65;
-    --fg-primary-shade: #1b867a;
+    --fg-primary: #2F4858;
+    --fg-primary-shade: #496677;
+    --fg-primary-dark: #0d3249;
+    --fg-primary-dark-shade: #18415a;
     --font-main: font-kings;
     --font-text: 'EB Garamond', serif;
 }
@@ -73,6 +75,10 @@ body {
     font-size: 1.3em;
     letter-spacing: .7mm;
     transition: 0.3s ease-in-out color;
+}
+
+.active {
+    color: var(--fg-primary-dark) !important;
 }
 
 .nav-link:hover {
