@@ -69,6 +69,18 @@ body {
     box-shadow: 0 1px 10px rgb(202, 137, 15);
 }
 
+/* Footer */
+.footer-link {
+    font-size: 1em !important;
+}
+
+@media screen and (max-width: 700px) {
+    .footer-link {
+        font-size: 0.7em !important;
+    }
+}
+
+
 /* --- Bootstrap --- */
 .nav-link {
     color: var(--fg-primary);
@@ -87,6 +99,11 @@ body {
 
 .card {
     background-color: rebeccapurple;
+}
+
+.btn {
+    background-color: var(--fg-primary-dark);
+    color:rgb(255, 255, 255)
 }
 
 .card-clickable {

@@ -15,6 +15,7 @@ class Beer:
     name: str
     country: str
     type: str
+    alcohol: float
     score: int
     added_date: str
     year: str = ''

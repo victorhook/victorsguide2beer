@@ -12,23 +12,45 @@ Beer - {{ beer.name }}
 {% block content %}
 
 <div class="row beer font-text fg-primary mt-5">
-    <div class="offset-3 col-6">
+    <div class="offset-1 col-10 offset-xl-3 col-xl-6">
         <h1 class="fs-1 fw-bold">{{ beer.name }}</h1>
         <hr>
 
         <div class="d-flex beer-body flex-column justify-content-start">
 
-            <div class="beer-info mt-3 mb-5 d-flex flew-row justify-content-between">
+            <div class="beer-info mt-3 mb-5 d-xl-flex flex-xl-row justify-content-between row">
 
-                <div class="d-flex flex-column">
-                    <p class="fs-3 fw-light">Land: <span class="ms-2 fs-3 fw-normal">{{ beer.country }}</span> </p>
-                    <p class="fs-3 fw-light">Sort: <span class="ms-2 fs-3 fw-normal">{{ beer.type }}</span> </p>
-                    <p class="fs-3 fw-light">År: <span class="ms-2 fs-3 fw-normal">{{ beer.year }}</span> </p>
-                    <p class="fs-3 fw-light">Bryggeri: <span class="ms-2 fs-3 fw-normal">{{ beer.brewery }}</span> </p>
-                    <p class="fs-3 fw-light">Poäng: <span class="ms-2 fs-3 fw-normal">{{ beer.score }}</span> / 10 </p>
+                <div class="col-12 col-xl-6 container-fluid">
+                    <div class="row gx-5 gy-1">
+                        <p class="col-4 fs-3 fw-light">Land: </p>
+                        <span class="col-8 fs-3 fw-normal">{{ beer.country }}</span>
+
+                        <p class="col-4 fs-3 fw-light">Sort: </p>
+                        <span class="col-8 fs-3 fw-normal">{{ beer.type }}</span>
+
+                        <p class="col-4 fs-3 fw-light">Alkohol: </p>
+                        <span class="col-8 fs-3 fw-normal">{{ beer.alcohol }} %</span>
+
+                        <p class="col-4 fs-3 fw-light">Poäng: </p>
+                        <span class="col-8 fs-3 fw-normal">{{ beer.score }} / 10</span>
+
+                        <p class="col-4 fs-3 fw-light">Bryggeri: </p>
+                        <span class="col-8 fs-3 fw-normal">{{ beer.brewery }}</span>
+
+                        <p class="col-4 fs-3 fw-light">År: </p>
+                        <span class="col-8 fs-3 fw-normal">{{ beer.year }}</span>
+                    </div>
                 </div>
 
-                <img class="beer-image rounded-1" src="{{ url_for('static', filename='images/beer.jpg') }}" alt="Beer image">
+                <div class="col-12 col-xl-6 mt-xl-0 mt-3">
+                    <img class="rounded-1 w-100"
+                        {% if beer.image %}
+                            src="{{ beer.image }}"
+                        {% else %}
+                            src="{{ url_for('static', filename='images/beer.jpg') }}"
+                        {% endif %}
+                        alt="Beer image">
+                </div>
 
             </div>
 

@@ -1,9 +1,4 @@
 .beer-card {
-    display: inline-block;
-    width: 400px;
-    height: 300px;
-    position: relative;
-    /*background-color: #f3c632;*/
     background-color: #1ab99c;
     box-shadow: 0 10px 10px #cfa310;
     color: var(--fg-primary-dark);
@@ -19,10 +14,12 @@
 }
 
 .beer-card img {
+    /*
     position: absolute;
     bottom: 1em;
     right: 1em;
     width: 120px;
+    */
 }
 
 .beer-side-panel {
@@ -34,17 +31,4 @@
 }
 
 .beer-image {
-    max-height: 300px;
-}
-
-@media screen and (max-width: 1300px) {
-    .beer-card {
-        width: 250px;
-    }
-}
-
-  @media screen and (max-width: 600px) {
-    .beer-card {
-        width: 300px;
-    }
 }

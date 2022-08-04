@@ -65,18 +65,19 @@
     <hr class="ms-5 me-5">
 </div>
 
-    <form method="POST" action="{{ url_for('add_new_beer') }}" class="w-50 m-auto" enctype="multipart/form-data">
+    <form class="w-50 m-auto font-text"  method="POST" action="{{ url_for('add_new_beer') }}" enctype="multipart/form-data">
         {{ render_param('Namn', 'name', required=True) }}
         {{ render_param('Land', 'country', required=True) }}
         {{ render_param('Typ', 'type', required=True) }}
-        {{ render_param('Poäng', 'score', required=True) }}
+        {{ render_param('Alkohol', 'alcohol', type='int', required=True) }}
+        {{ render_param('Poäng', 'score', type='int', required=True) }}
         {{ render_param('Bild', 'image', type='image', required=True) }}
         {{ render_param('År', 'year', type='int') }}
         {{ render_param('Bryggeri', 'brewery') }}
         {{ render_param('Beskrivning', 'description') }}
 
-        <div class="text-center m-5">
-            <button type="submit" class="btn btn-primary">Spara</button>
+        <div class="text-center m-5 font-main">
+            <button type="submit" class="fs-2 p-3 btn btn-primary">Spara</button>
         </div>
 
     </form>

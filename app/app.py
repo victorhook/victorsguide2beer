@@ -1,5 +1,5 @@
 from collections import namedtuple
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 import os
 from pathlib import Path
 from typing import List
@@ -80,10 +80,22 @@ class BeerView:
         def __hash__(self) -> int:
             return self.beer_type.__hash__()
 
+    @classmethod
+    def _remove_nones(cls, beer: models.Beer) -> models.Beer:
+        if not beer.year:
+            beer.year = 'Oklart'
+        if not beer.brewery:
+            beer.brewery = 'Oklart'
+        #if not beer.description:
+        #    beer.description = 'Ingen utförlig beskrivning är skriven om' + \
+        #                        f' {beer.name} än.'
+        return beer
+
     @app.route('/beers/')
     def get_beers():
         beer_type = request.args.get('beer_type')
         beers = db.get_beers()
+        beers = list(map(BeerView._remove_nones, beers))
         types = set(BeerView.BeerType(beer.type, False) for beer in beers)
 
         # Filter by beer type
@@ -110,6 +122,7 @@ class BeerView:
     @app.route('/beers/<string:beer_name>')
     def get_beer(beer_name: str):
         beers = db.get_beers()
+        beers = list(map(BeerView._remove_nones, beers))
         beer_type = request.args.get('beer_type')
 
         for beer in beers:
@@ -137,8 +150,7 @@ class Admin:
         added_date = datetime.now().strftime('%Y-%m-%d')
         new_beer = models.Beer(**request.form, added_date=added_date)
         new_beer.score = float(new_beer.score)
-        print(new_beer)
-        print(request.files)
+        new_beer.alcohol = float(new_beer.alcohol)
 
         image = request.files['image']
 

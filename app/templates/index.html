@@ -21,7 +21,13 @@
             <p class="m-0 fs-6 fw-light">{{ event.added_date }}</p>
         </div>
         <div>
-            <img class="img-fluid" src="{{ url_for('static', filename='images/beer.jpg') }}">
+            <img class="rounded-1 w-100"
+                {% if beer.image %}
+                    src="{{ beer.image }}"
+                {% else %}
+                    src="{{ url_for('static', filename='images/beer.jpg') }}"
+                {% endif %}
+                alt="Beer image">
         </div>
     </div>
 </div>
@@ -65,9 +71,9 @@
 
 <div class="d-flex flex-row justify-content-between mt-5">
 
-    <div class="row">
+    <div class="row me-1 ms-1">
 
-        <div class="text-center offset-xl-1 col-xl-3 offset-2 col-8">
+        <div class="text-center offset-xl-1 col-xl-3 offset-sm-2 col-sm-8 offset-0 col-12">
             <h2 class="fg-primary">Senaste nytt:</h2>
 
             <div class="d-flex flex-column justify-content-start">

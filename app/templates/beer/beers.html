@@ -2,47 +2,56 @@
 
 {% block title %}
 Öl
-{% endblock %}
 
+{% endblock %}
 {% block css %}
     <link href="{{ url_for('static', filename='css/beer.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% macro render_beer(beer) %}
-<a class="beer-card d-flex flex-column justify-content-start p-3 m-3" href="{{ url_for('get_beer', beer_name=beer.name) }}">
+<div class="col-md-12 col-lg-6 col-xl-4 position-relative">
+    <a class="beer-card d-block p-3 w-100 h-100" href="{{ url_for('get_beer', beer_name=beer.name) }}">
 
-        <div class="card-title">
-            <h3 class="card-title fw-bold fs-2">
-                {{ beer.name }}
-            </h3>
+        <div class="row">
+            <div class="d-flex justify-content-between flex-row">
+                <h3 class="fw-bold fs-2">{{ beer.name }}</h3>
+                <span class="fs-4 fw-light">{{ beer.alcohol }} %</span>
+            </div>
             <hr>
         </div>
 
-        <div class="">
-            <div class="d-flex align-items-center mb-3">
-                <i class="me-2 fa-solid fa-star"></i>
-                <p class="fs-5 p-0 m-0 fw-light">{{ beer.score }}/10</p>
+
+        <div class="row">
+            <div class="col-8">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="me-2 fa-solid fa-star"></i>
+                    <p class="fs-5 p-0 m-0 fw-light">{{ beer.score }}/10</p>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="me-2 fa-solid fa-beer-mug-empty"></i>
+                    <p class="fs-5 p-0 m-0 fw-light">{{ beer.type }}</p>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="me-2 fa-solid fa-location-pin"></i>
+                    <p class="fs-5 p-0 m-0 fw-light">{{ beer.country }}</p>
+                </div>
             </div>
-            <div class="d-flex align-items-center mb-3">
-                <i class="me-2 fa-solid fa-beer-mug-empty"></i>
-                <p class="fs-5 p-0 m-0 fw-light">{{ beer.type }}</p>
+
+            <div class="col-4">
+                <img class="rounded-2 h-100 w-100"
+                    {% if beer.image %}
+                        src="{{ beer.image }}"
+                    {% else %}
+                        src="{{ url_for('static', filename='images/beer.jpg') }}"
+                    {% endif %}
+                    alt="Beer image">
             </div>
-            <div class="d-flex align-items-center mb-3">
-                <i class="me-2 fa-solid fa-location-pin"></i>
-                <p class="fs-5 p-0 m-0 fw-light">{{ beer.country }}</p>
-            </div>
+
         </div>
 
+    </a>
+</div>
 
-    <img class="img-fluid rounded-2" 
-        {% if beer.image %}
-            src="{{ beer.image }}" 
-        {% else %}
-            src="{{ url_for('static', filename='images/beer.jpg') }}" 
-        {% endif %}
-        alt="Beer image">
-    <!--<img class="card-image img-fluid" src="{{ url_for('static', filename='images/logo.png') }}" alt="Image"> -->
-</a>
 {% endmacro %}
 
 {% block content %}
@@ -67,26 +76,31 @@
 
         <div class="container-fluid mt-3 ps-5 pe-5">
 
-            <!-- Top three beers -->
             {% if top_three_beers %}
-                <div class="row text-center mt-0 pt-0 mb-3">
-                    <h3 class="fs-2">Hetaste 3 öl just nu!</h3>
-                </div>
-                <div class="d-flex flex-wrap  mb-5 justify-content-center">
-                    {% for beer in top_three_beers %}
+                <div class="container-fluid">
+                    <div class="row text-center">
+                        <h2 class="fs-2 mb-5">Topp tre öl</h2>
+                    </div>
+                    <div class="row gx-5 gy-5">
+                        {% for beer in top_three_beers %}
                         {{ render_beer(beer) }}
-                    {% endfor %}
-                </div>
-                <div class="row text-center mb-3">
-                    <h3 class="fs-2">All öl</h3>
+                        {% endfor %}
+                    </div>
+                    <hr class="mt-5 mb-5">
                 </div>
             {% endif %}
-            <!----------------------->
 
-            <div class="d-flex flex-wrap mt-0 pt-0 justify-content-center">
-                {% for beer in beers %}
+
+            <div class="container-fluid">
+                <div class="row text-center">
+                    <h2 class="fs-2 mb-5">All öl</h2>
+                </div>
+                <div class="row gx-5 gy-5">
+                    {% for beer in beers %}
                     {{ render_beer(beer) }}
-                {% endfor %}
+                    {% endfor %}
+                </div>
+
             </div>
 
         </div>
