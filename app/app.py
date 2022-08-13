@@ -54,9 +54,11 @@ class BlogView:
 
     @app.route('/blog/')
     def get_blog():
+        posts = utils.get_posts()
+        posts = utils.sort_by_date(posts)
         return render_template(
             'blog/blog.html',
-            posts=utils.get_posts()
+            posts=posts
         )
 
     @app.route('/blog/post/<string:post>')
@@ -65,9 +67,11 @@ class BlogView:
         return render_template(post_path)
 
 
-@app.route('/brewing/')
-def get_brewing():
-    return render_template('brewing/brewing.html')
+class BrewingView:
+
+    @app.route('/brewing/')
+    def get_brewing():
+        return render_template('brewing/brewing.html')
 
 
 class BeerView:
@@ -135,6 +139,24 @@ class BeerView:
         )
 
 
+# --- Filters --- #
+@app.template_filter()
+def post_image(image: str) -> str:
+    # TODO: Better solution for this?
+    pre = '/static/images/posts/'
+    return pre + image.strip()
+
+@app.template_filter()
+def beer_image(image: str) -> str:
+    # TODO: Better solution for this?
+    pre = '/static/beers/'
+    return pre + image.strip()
+
+@app.template_filter()
+def ref(number: int, author: str, title: str, date: str, url: str) -> str:
+    return '<p class="ref">' + f'{number}. {author}. {title}. {date}: {url}' + '</p>'
+
+
 class Admin:
 
     @app.route('/add_beer')
@@ -147,8 +169,8 @@ class Admin:
     @app.route('/add_new_beer', methods=['POST'])
     @auth.login_required
     def add_new_beer() -> None:
-        added_date = datetime.now().strftime('%Y-%m-%d')
-        new_beer = models.Beer(**request.form, added_date=added_date)
+        date = datetime.now().strftime('%Y-%m-%d')
+        new_beer = models.Beer(**request.form, date=date)
         new_beer.score = float(new_beer.score)
         new_beer.alcohol = float(new_beer.alcohol)
 

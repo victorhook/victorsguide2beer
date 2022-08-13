@@ -28,7 +28,7 @@
 
     <div class="wrapper">
 
-        <nav class="navbar navbar-expand-sm color-primary-fg pt-3 pb-3 pe-md-5 ps-md-5">
+        <nav class="navbar navbar-expand-md color-primary-fg pt-3 pb-3 pe-md-5 ps-md-5">
             <div class="container-fluid">
 
                 <a class="navbar-brand fs-1" href="{{ url_for('get_index') }}">victorsguide2beer</a>
@@ -39,15 +39,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="fs-4 nav-item ps-sm-5">
+                        <li class="fs-4 nav-item ps-md-5">
                             <a class="nav-link {% if request.endpoint == 'get_blog' %}active{% endif %}"
                               href="{{ url_for('get_blog') }}">Blogg</a>
                         </li>
-                        <li class="fs-4 nav-item ps-sm-5">
+                        <li class="fs-4 nav-item ps-md-5">
                             <a class="nav-link {% if request.endpoint == 'get_brewing' %}active{% endif %}"
                              href="{{ url_for('get_brewing') }}">Bryggning</a>
                         </li>
-                        <li class="fs-4 nav-item ps-sm-5">
+                        <li class="fs-4 nav-item ps-md-5">
                             <a class="nav-link {% if request.endpoint == 'get_beers' %}active{% endif %}"
                              href="{{ url_for('get_beers') }}">Ölsorter</a>
                         </li>

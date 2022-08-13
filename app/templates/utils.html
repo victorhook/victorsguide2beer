@@ -1,0 +1,13 @@
+{% macro ref(number, author, title, date, url) %}
+<div class="row">
+    <div class="ref d-flex flew-row fs-6">
+        <p class="">
+            {{ number }}. {{ author }}. {{ title }}.
+            {% if date %}
+            Hämtad {{ date }}
+            {% endif %}
+        </p>
+        <a class="ms-2 text-break m-0" href="#">{{ url }} </a>
+    </div>
+</div>
+{% endmacro %}

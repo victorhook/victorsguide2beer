@@ -1,15 +1,19 @@
 .news-card {
-    text-decoration: none;
-    transition: 0.3s ease-in-out all;
-    background-color: #f7ca37;
+    background-color: var(--bg-primary-dark);
     box-shadow: 0 10px 10px #cfa310;
+    color: var(--fg-primary-dark);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out all;
+    border: 2px solid  transparent;
 }
 
 .news-card:hover {
-    color: var(--fg-primary-shade);
-    transform: scale(1.03);
-    background-color: #f8ce44;
+    border: 2px solid  #22201f;
+    color: var(--fg-primary-dark);
+    transform: scale(1.05);
 }
+
 .news-body img {
     max-height: 100px;
 }

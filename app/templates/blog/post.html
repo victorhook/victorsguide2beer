@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% import 'utils.html' as utils  %}
+
 {# Post specific variables, set by child post.  #}
 
 {% set this_title %}
@@ -14,9 +16,22 @@
     {% endblock %}
 {% endset %}
 
+{% set this_image %}
+    {% block post_image %}
+    {% endblock %}
+{% endset %}
+
 {% set this_body %}
     {% block post_body %}
         Body missing
+    {% endblock %}
+{% endset %}
+
+{% block post_image_translate_y %}
+{% endblock %}
+
+{% set this_references %}
+    {% block post_references %}
     {% endblock %}
 {% endset %}
 
@@ -28,6 +43,7 @@ Blogg - {{ this_title }}
 {% endblock %}
 
 {% block css %}
+    <link href="{{ url_for('static', filename='css/blog.css') }}" rel="stylesheet">
 {% endblock %}
 
 
@@ -42,10 +58,21 @@ Blogg - {{ this_title }}
     </div>
 
     <div class="row">
-        <article class="font-text fg-primary offset-0 col-12 ps-4 pe-4 offset-md-2 col-md-8 offset-xl-3 col-xl-6">
+        <article class="font-text post fg-primary offset-0 col-12 ps-4 pe-4 offset-md-2 col-md-8 offset-xl-3 col-xl-6">
             {% markdown %}
                 {{ this_body }}
             {% endmarkdown %}
+
+
+            {% if this_references %}
+                <div class="container-fluid">
+                    <div class="row h3 gy-0">
+                        Referenser
+                    </div>
+                    {{ this_references }}
+                </div>
+            {% endif %}
+
         </article>
     </div>
 

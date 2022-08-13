@@ -1,3 +1,30 @@
-.blog-card {
+.post img {
+    display: block;
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
+.post a {
+    color: rgb(49, 49, 49);
+    transition: 0.3s ease-in-out color;
+}
+
+.post a:hover {
+    color: black;
+}
+
+.post hr {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+
+
+.news-card-image {
+    height: 200px;
+    overflow: hidden;
+}
+.news-card-image img {
+    /*transform: translateY(-20%);
+}

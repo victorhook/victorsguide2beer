@@ -14,8 +14,8 @@
 
         <div class="row">
             <div class="d-flex justify-content-between flex-row">
-                <h3 class="fw-bold fs-2">{{ beer.name }}</h3>
-                <span class="fs-4 fw-light">{{ beer.alcohol }} %</span>
+                <h3 class="fw-bold fs-4">{{ beer.name }}</h3>
+                <span class="fs-5 fw-light">{{ beer.alcohol }} %</span>
             </div>
             <hr>
         </div>
@@ -38,7 +38,7 @@
             </div>
 
             <div class="col-4">
-                <img class="rounded-2 h-100 w-100"
+                <img class="beer-card-image w-100 rounded-2"
                     {% if beer.image %}
                         src="{{ beer.image }}"
                     {% else %}
@@ -58,7 +58,7 @@
 
     <div class="d-flex flex-xl-row flex-column fg-primary font-text">
 
-        <div class="beer-side-panel d-flex justify-content-start ps-5 pe-5 mt-3 flex-column">
+        <div class="beer-side-panel d-flex justify-content-start ps-3 pe-3 ps-lg-5 pe-lg-5 mt-3 flex-column">
             <h3 class="fs-2 mb-0">Ölsorter</h3>
             <hr class="shadow">
 
@@ -74,7 +74,7 @@
             {% endfor %}
         </div>
 
-        <div class="container-fluid mt-3 ps-5 pe-5">
+        <div class="container-fluid mt-3 ps-0 pe-0 ps-lg-5 pe-lg-5">
 
             {% if top_three_beers %}
                 <div class="container-fluid">

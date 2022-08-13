@@ -1,9 +1,9 @@
 .beer-card {
-    background-color: #1ab99c;
+    background-color: var(--bg-primary-dark);
     box-shadow: 0 10px 10px #cfa310;
     color: var(--fg-primary-dark);
     text-decoration: none;
-    border: 2px solid transparent;
+    border-radius: 10px;
     transition: 0.3s ease-in-out all;
 }
 
@@ -11,15 +11,6 @@
     border: 2px solid  #22201f;
     color: var(--fg-primary-dark);
     transform: scale(1.05);
-}
-
-.beer-card img {
-    /*
-    position: absolute;
-    bottom: 1em;
-    right: 1em;
-    width: 120px;
-    */
 }
 
 .beer-side-panel {

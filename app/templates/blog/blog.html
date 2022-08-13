@@ -6,8 +6,8 @@ Blogg
 
 {% block css %}
     <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/blog.css') }}" rel="stylesheet">
 {% endblock %}
-
 
 {% block content %}
 
@@ -16,21 +16,30 @@ Blogg
     {% for post in posts %}
         <div class="row m-3">
 
-            <a class="news-card offset-1 col-10 offset-lg-3 col-lg-6 offset-xl-4 col-xl-5 mt-3 mb-3 p-3 font-text fg-primary" href="{{ url_for('get_post', post=post.path) }}">
+            <a class="news-card offset-0 col-12 offset-lg-3 col-lg-6 offset-xl-4 col-xl-5 mt-3 mb-3 p-0 font-text fg-primary rounded" href="{{ url_for('get_post', post=post.path) }}">
 
-                <h3 class="fs-2 fw-bold">{{ post.title }}</h3>
-                <div class="news-body d-flex justify-content-between">
-                    <div class="d-flex flex-column justify-content-between">
-                        <div>
-                            <p class="fs-5 m-0">{{ post.excerpt }}</p>
-                            <p class="fs-5 m-0">{{ post.date }}</p>
-                        </div>
+                <div class="news-card-image rounded-top">
+                    {% if post.image %}
+                        {% set image = post.image %}
+                    {% else %}
+                        {% set image = url_for('static', filename='images/beer.jpg') %}
+                    {% endif %}
+                    <img class="img-fluid" src="{{ image }}"
+                        style="transform: translateY(-20%);"
+                        >
+                </div>
+
+                <div class="news-card-body p-3 ">
+                    <div class="mb-3 d-flex justify-content-between align-content-center">
+                        <h3 class="fs-2 fw-bold">{{ post.title }}</h3>
+                        <p class="fs-6 p-0 mt-auto"> <i class="fa-solid fa-clock me-1"></i> {{ post.read_length }} min</p>
                     </div>
-                    <div>
-                        <img class="img-fluid" src="{{ url_for('static', filename='images/beer.jpg') }}">
+
+                    <div class="news-body d-flex flex-column justify-content-between">
+                        <p class="fs-5 mb-4">{{ post.excerpt }}</p>
+                        <p class="fs-5 m-0">{{ post.date }}</p>
                     </div>
                 </div>
-                    <!--<img class="card-image img-fluid" src="{{ url_for('static', filename='images/logo.png') }}" alt="Image"> -->
             </a>
 
         </div>

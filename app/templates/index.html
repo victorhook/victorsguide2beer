@@ -5,20 +5,29 @@
 {% endblock %}
 
 <!-- Macros -->
-{% macro render_beer(event) %}
-
-{% set beer = event.event %}
+{% macro render_beer(beer) %}
 
 <div class="news-beer">
+    <p class="fs-5 p-0 m-2">Lade till en ny öl:</p>
+
     <h3 class="fs-2 fw-bold">{{ beer.name }}</h3>
     <div class="news-body d-flex justify-content-between">
         <div class="d-flex flex-column justify-content-between">
             <div>
-                <p class="fs-5 m-0">{{ beer.country }}</p>
-                <p class="fs-5 m-0">{{ beer.type }}</p>
-                <p class="fs-5 m-0">{{ beer.score }} / 10 öl</p>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="me-2 fa-solid fa-star"></i>
+                    <p class="fs-5 p-0 m-0 fw-light">{{ beer.score }}/10</p>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="me-2 fa-solid fa-beer-mug-empty"></i>
+                    <p class="fs-5 p-0 m-0 fw-light">{{ beer.type }}</p>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="me-2 fa-solid fa-location-pin"></i>
+                    <p class="fs-5 p-0 m-0 fw-light">{{ beer.country }}</p>
+                </div>
             </div>
-            <p class="m-0 fs-6 fw-light">{{ event.added_date }}</p>
+            <p class="m-0 fs-6 fw-light">{{ beer.date }}</p>
         </div>
         <div>
             <img class="rounded-1 w-100"
@@ -33,34 +42,49 @@
 </div>
 {% endmacro %}
 
-{% macro render_post(event) %}
-{% set post = event.event %}
-
+{% macro render_post(post) %}
 <div class="news-post">
+    <p class="fs-5 p-0 m-2">Nytt inlägg på bloggen:</p>
+
     <h3 class="fs-2 fw-bold">{{ post.title }}</h3>
-    <div class="news-body d-flex justify-content-between">
+    <div class="news-body d-flex flex-column justify-content-between">
+
+        <div class="text-center m-2">
+            <img class="rounded-1"
+                {% if post.image %}
+                    src="{{ post.image }}"
+                {% else %}
+                    src="{{ url_for('static', filename='images/beer.jpg') }}"
+                {% endif %}
+                alt="Beer image">
+        </div>
+
+
         <div class="d-flex justify-content-between flex-column me-2">
             <div>
                 <p class="m-0 fs-5 text-wrap">{{ post.excerpt }}</p>
             </div>
-                <p class="m-0 fs-6 fw-light">{{ event.added_date }}</p>
-        </div>
-        <div>
-            <img class="img-fluid" src="{{ url_for('static', filename='images/logo.png') }}">
+                <p class="m-0 fs-6 fw-light">{{ post.date }}</p>
         </div>
     </div>
 </div>
 {% endmacro %}
 
 {% macro render_event(event) %}
-    <a class="news-card fg-primary font-text m-3 p-3 text-start" href="#">
-        {% if event.event.__class__.__name__ == 'Beer' %}
+    {% if event.event_type() == 'Beer' %}
+        {% set url = url_for('get_beer', beer_name=event.name) %}
+    {% elif event.event_type() == 'BlogPost' %}
+        {% set url = url_for('get_post', post=event.path) %}
+    {% else %}
+        {% set url = '#' %}
+    {% endif %}
+
+    <a class="news-card fg-primary font-text mb-3 mt-3 p-3 text-start" href="{{ url }}">
+        {% if event.event_type() == 'Beer' %}
             {{ render_beer(event) }}
-        {% elif event.event.__class__.__name__ == 'BlogPost' %}
+        {% elif event.event_type() == 'BlogPost' %}
             {{ render_post(event) }}
         {% endif %}
-
-        <hr class="mt-2 mb-2">
     </a>
 {% endmacro %}
 <!------>
@@ -69,23 +93,22 @@
 <!-- Content -->
 {% block content %}
 
-<div class="d-flex flex-row justify-content-between mt-5">
+<div class="d-flex flex-row justify-content-between mt-5 ms-0 me-0">
 
-    <div class="row me-1 ms-1">
+    <div class="row">
 
         <div class="text-center offset-xl-1 col-xl-3 offset-sm-2 col-sm-8 offset-0 col-12">
             <h2 class="fg-primary">Senaste nytt:</h2>
 
             <div class="d-flex flex-column justify-content-start">
                 {% for event in new_events  %}
-                    <!--<p>Lade till:</p> -->
                     {{ render_event(event) }}
                 {% endfor %}
             </div>
         </div>
 
-        <div class="offset-xl-1 col-xl-7 offset-2 col-8 mt-5">
-            <img id="front-image" class="img-fluid" src="{{ url_for('static', filename='images/wine.jpg') }}">
+        <div class="offset-xl-1 col-xl-7 offset-2 col-8 mt-5 ms-auto pe-0">
+            <img id="front-image" class="img-fluid" src="{{ url_for('static', filename='images/front_page.jpg') }}">
         </div>
 
     </div>
