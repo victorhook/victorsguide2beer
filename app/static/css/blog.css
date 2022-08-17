@@ -1,8 +1,10 @@
 .post img {
     display: block;
-    width: 100%;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin: 3em 0;
+    max-height: 50vh;
+    max-width: 100%;
+    margin: auto;
+    width: auto;
 }
 
 .post a {
