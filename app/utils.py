@@ -3,6 +3,8 @@ from datetime import datetime
 import os
 from pathlib import Path
 import pickle
+import subprocess
+import sys
 from typing import List
 
 
@@ -14,6 +16,7 @@ BASE_PATH = Path(__file__).absolute().parent
 POSTS_PATHS = BASE_PATH.joinpath('templates', 'posts')
 EVENTS_PATH = BASE_PATH.joinpath('events.pickle')
 
+TOOLS_PATH = BASE_PATH.parent.joinpath('tools')
 
 
 def date() -> str:
@@ -38,5 +41,12 @@ def get_events() -> List[Event]:
 
     return events
 
+
+def build_static_files() -> None:
+    python_exe = sys.executable
+    create_events = TOOLS_PATH.joinpath('create_events.py')
+    subprocess.run(f'{python_exe} {create_events}', shell=True)
+
+
 if __name__ == '__main__':
-    get_posts()
+    build_static_files()

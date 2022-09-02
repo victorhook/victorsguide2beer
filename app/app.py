@@ -71,7 +71,15 @@ class BrewingView:
 
     @app.route('/brewing/')
     def get_brewing():
-        return render_template('brewing/brewing.html')
+        brews = [
+            models.Brew(utils.date(), 'Weissbeer'),
+            models.Brew(utils.date(), 'Heiniken'),
+            models.Brew(utils.date(), 'Blonde'),
+        ]
+        return render_template(
+            'brewing/brewing.html',
+            brews=brews
+        )
 
 
 class BeerView:
@@ -95,12 +103,24 @@ class BeerView:
         #                        f' {beer.name} än.'
         return beer
 
+    def _get_beer_types(beers: List[models.Beer]) -> List[str]:
+        types = set()
+        # Beer types can be comma-separated. We must therefore loop through
+        # each beer and get (potentially multiple) types for each beer.
+        for beer in beers:
+            print(beer.type)
+            for type in beer.type.split(', '):
+                types.add(BeerView.BeerType(type.strip(), False))
+
+        return types
+
+
     @app.route('/beers/')
     def get_beers():
         beer_type = request.args.get('beer_type')
         beers = db.get_beers()
         beers = list(map(BeerView._remove_nones, beers))
-        types = set(BeerView.BeerType(beer.type, False) for beer in beers)
+        types = BeerView._get_beer_types(beers)
 
         # Filter by beer type
         if beer_type is not None:
@@ -169,7 +189,7 @@ class Admin:
     @app.route('/add_new_beer', methods=['POST'])
     @auth.login_required
     def add_new_beer() -> None:
-        date = datetime.now().strftime('%Y-%m-%d')
+        date = utils.date()
         new_beer = models.Beer(**request.form, date=date)
         new_beer.score = float(new_beer.score)
         new_beer.alcohol = float(new_beer.alcohol)
@@ -189,6 +209,9 @@ class Admin:
         beers = db.get_beers()
         beers.append(new_beer)
         db.save_beers(beers)
+
+        # Invoke script to build static stuff
+        utils.build_static_files()
 
         return render_template(
             'admin/admin.html'
