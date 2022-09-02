@@ -71,11 +71,15 @@ class BrewingView:
 
     @app.route('/brewing/')
     def get_brewing():
+        # TODO: Work this out in future.
+        '''
         brews = [
             models.Brew(utils.date(), 'Weissbeer'),
             models.Brew(utils.date(), 'Heiniken'),
             models.Brew(utils.date(), 'Blonde'),
         ]
+        '''
+        brews = []
         return render_template(
             'brewing/brewing.html',
             brews=brews

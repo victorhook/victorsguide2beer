@@ -1,9 +1,10 @@
+#!/usr/bin/env python3
+
 from copy import copy
 from dataclasses import asdict
 from datetime import datetime
+import json
 import pickle
-import flask
-from io import TextIOWrapper
 import os
 from pathlib import Path
 import textwrap
@@ -17,6 +18,7 @@ from markdown import Markdown, markdown
 BASE_PATH = Path(__file__).absolute().parent
 APP_PATH = BASE_PATH.parent.joinpath('app')
 EVENTS_PATH = APP_PATH.joinpath('events.pickle')
+EVENTS_PATH_JSON = APP_PATH.joinpath('events.json')
 sys.path.append(str(APP_PATH))
 
 from models import Beer, BlogPost, Event
@@ -89,16 +91,17 @@ def create_posts() -> List[BlogPost]:
         else:
             post_excerpt = post_body_only_text
 
-        if post_excerpt[-1] != ' ':
-            post_excerpt += ' '
-        post_excerpt += '...'
-        post_excerpt = textwrap.dedent(post_excerpt)
+        if post_excerpt:
+            if post_excerpt[-1] != ' ':
+                post_excerpt += ' '
+            post_excerpt += '...'
+            post_excerpt = textwrap.dedent(post_excerpt)
 
         # TODO: Fix better solution for this
         if post_image is not None:
             post_image = '/static/images/posts/' + post_image
 
-        post_read_length = len(post_body_only_text) // AVERAGE_WORDS_PER_MINUTE_READING
+        post_read_length = len(post_body_only_text.split(' ')) // AVERAGE_WORDS_PER_MINUTE_READING
 
         blog_post = BlogPost(
             post_date,
@@ -137,5 +140,15 @@ if __name__ == '__main__':
     posts = create_posts()
     beers = db.get_beers()
     events = posts + beers
+    print(f'Saving events to {EVENTS_PATH} and json to {EVENTS_PATH_JSON}')
     with open(EVENTS_PATH, 'wb') as f:
         pickle.dump(events, f)
+
+    def jsonify_event(event: Event) -> dict:
+        event_json = asdict(event)
+        event_json['type'] = event.__class__.__name__
+        return event_json
+
+    with open(EVENTS_PATH_JSON, 'w') as f:
+        data = [jsonify_event(event) for event in events]
+        json.dump(data, f, indent=4)
