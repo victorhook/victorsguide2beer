@@ -16,6 +16,10 @@ EVENTS_PATH = BASE_PATH.joinpath('events.pickle')
 
 
 
+def date() -> str:
+    return datetime.now().strftime('%Y-%m-%d')
+
+
 def sort_by_date(events: List[Event]) -> List[Event]:
     def sorter(event: Event):
         return datetime.strptime(event.date, '%Y-%m-%d')

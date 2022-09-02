@@ -81,6 +81,11 @@ body {
     }
 }
 
+@media screen and (max-width: 500px) {
+    .footer-link {
+        font-size: 0.5em !important;
+    }
+}
 
 /* --- Bootstrap --- */
 .nav-link {
